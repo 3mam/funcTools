@@ -5,12 +5,12 @@ function objCopyEditReturn(obj, fn) {
 	return copy
 }
 
-function pipe(obj) {
+function Pipe(obj) {
 	this.valueOf = () => obj
-	this.pipe = (fn) => new pipe(objCopyEditReturn(obj, fn))
+	this.pipe = (fn) => new Pipe(objCopyEditReturn(obj, fn))
 }
 
-export const piping = obj => new pipe(obj)
+export const piping = obj => new Pipe(obj)
 
 export const recursion = func => (...variables) => {
 	try {
