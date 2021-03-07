@@ -1,10 +1,8 @@
 function objCopyEditReturn(obj, fn) {
-	if (typeof obj === 'object') {
-		const copy = { ...obj }
-		fn(copy)
-		return copy
-	}
-	return fn(obj)
+	if (typeof obj === 'object')
+		return fn({ ...obj })
+	else
+		return fn(obj)
 }
 
 function Pipe(obj) {
