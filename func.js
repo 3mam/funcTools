@@ -1,5 +1,7 @@
 function objProtect(obj, fn) {
-	if (typeof obj === 'object')
+	if (Array.isArray(obj))
+		return [...fn(obj)]
+	else if (typeof obj === 'object')
 		return { ...obj, ...fn(obj) }
 	else
 		return fn(obj)
