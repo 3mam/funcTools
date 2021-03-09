@@ -1,7 +1,8 @@
 function objProtect(obj, fn) {
 	if (typeof obj === 'object')
 		return { ...obj, ...fn(obj) }
-	else fn(obj)
+	else
+		return fn(obj)
 }
 
 function pipe(obj) {
