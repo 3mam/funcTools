@@ -1,4 +1,8 @@
-const objProtect = (obj, fn) => ({ ...obj, ...fn(obj) })
+function objProtect(obj, fn) {
+	if (typeof obj === 'object')
+		return { ...obj, ...fn(obj) }
+	else fn(obj)
+}
 
 function pipe(obj) {
 	Object.freeze(obj)
