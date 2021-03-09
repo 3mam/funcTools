@@ -1,18 +1,12 @@
-function objCopyEditReturn(obj, fn) {
-	if (typeof obj === 'object') {
-		const copy = { ...obj }
-		fn(copy)
-		return copy
-	}
-	return fn(obj)
-}
+const objProtect = (obj, fn) => ({ ...obj, ...fn(obj) })
 
-function Pipe(obj) {
+function pipe(obj) {
+	Object.freeze(obj)
 	this.valueOf = () => obj
-	this.pipe = (fn) => new Pipe(objCopyEditReturn(obj, fn))
+	this.pipe = (fn) => new pipe(objProtect(obj, fn))
 }
 
-export const piping = obj => new Pipe(obj)
+export const piping = obj => new pipe(obj)
 
 export const recursion = func => (...variables) => {
 	try {
