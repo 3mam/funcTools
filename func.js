@@ -14,6 +14,7 @@ function pipe(obj) {
 }
 
 export const piping = obj => new pipe(obj)
+export const composition = (...fn) => val => fn.reduce((v, f) => f(v), val)
 
 export const recursion = func => (...variables) => {
 	try {
