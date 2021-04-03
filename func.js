@@ -17,11 +17,31 @@ function pipe(obj) {
 export const piping = obj => new pipe(obj)
 export const composition = (...fn) => val => fn.reduce((v, f) => f(v), val)
 
-export const recursion = func => (...variables) => {
+export const recursion = fn => (...variables) => {
 	try {
 		while (true)
-			variables = func(...variables)
+			variables = fn(...variables)
 	} catch (returnData) {
 		return returnData
+	}
+}
+
+export const lazy = fn => {
+	let obj
+	return () => {
+		obj = obj ?? fn()
+		return Object.freeze(obj)
+	}
+}
+
+export const memoize = fn => {
+	const mem = new Map()
+	return (variable) => {
+		if (mem.has(variable))
+			return mem.get(variable)
+		else {
+			mem.set(variable, fn(variable))
+			return mem.get(variable)
+		}
 	}
 }
