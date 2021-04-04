@@ -1,8 +1,10 @@
+const isObject = val => typeof val === 'object'
+
 function objProtect(obj, fn) {
 	const returnObj = fn(obj)
 	if (Array.isArray(returnObj))
 		return [...returnObj]
-	else if (typeof returnObj === 'object')
+	else if (isObject(returnObj))
 		return { ...obj, ...returnObj }
 	else
 		return returnObj
@@ -37,7 +39,7 @@ export const lazy = fn => {
 export const memoize = fn => {
 	const mem = new Map()
 	return (...variable) => {
-		const val = variable.join()
+		const val = JSON.stringify(variable)
 		if (mem.has(val))
 			return mem.get(val)
 		else
