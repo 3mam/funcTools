@@ -36,12 +36,11 @@ export const lazy = fn => {
 
 export const memoize = fn => {
 	const mem = new Map()
-	return (variable) => {
-		if (mem.has(variable))
-			return mem.get(variable)
-		else {
-			mem.set(variable, fn(variable))
-			return mem.get(variable)
-		}
+	return (...variable) => {
+		const val = variable.join()
+		if (mem.has(val))
+			return mem.get(val)
+		else
+			return mem.set(val, fn(...variable)).get(val)
 	}
 }
