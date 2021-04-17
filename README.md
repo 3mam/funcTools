@@ -1,1 +1,1 @@
-My functions that fill in the gaps in JavaScript functional programming.
+My functions that fill the gaps in JavaScript functional programming.
