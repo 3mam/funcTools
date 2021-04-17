@@ -15,21 +15,21 @@ export const recursion = fn => (...variables) => {
 }
 
 export const lazy = fn => {
-	let obj
+	let cache
 	return () => {
-		obj = obj ?? fn()
-		return Object.freeze(obj)
+		cache = cache ?? fn()
+		return cache
 	}
 }
 
 export const memoize = fn => {
-	const mem = new Map()
+	const cache = new Map()
 	return (...variable) => {
 		const val = JSON.stringify(variable)
-		if (mem.has(val))
-			return mem.get(val)
+		if (cache.has(val))
+			return cache.get(val)
 		else
-			return mem.set(val, fn(...variable)).get(val)
+			return cache.set(val, fn(...variable)).get(val)
 	}
 }
 
