@@ -1,7 +1,4 @@
-export const piping = (obj) => ({
-	pipe: (fn) => piping(fn(Object.freeze(obj))),
-	valueOf: () => obj,
-})
+export const piping = val => fn => fn ? piping(fn(Object.freeze(val))) : val
 
 export const composition = (...fn) => val => fn.reduce((v, f) => f(v), val)
 
