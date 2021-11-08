@@ -1,5 +1,7 @@
 export const piping = (val, ...fn) => fn.reduce((v, f) => f(v), val)
 
+export const pipObj = (val, ...fn) => fn.reduce((v, f) => ({...v, ...f(v)}), val)
+
 export const composition = (...fn) => val => fn.reduce((v, f) => f(v), val)
 
 export const recursion = fn => (...variables) => {
