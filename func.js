@@ -4,14 +4,26 @@ export const pipObj = (val, ...fn) => fn.reduce((v, f) => ({...v, ...f(v)}), val
 
 export const composition = (...fn) => val => fn.reduce((v, f) => f(v), val)
 
-export const recursion = fn => (...variables) => {
+export const recursion = fn => (...val) => {
 	try {
 		while (true)
-			variables = fn(...variables)
-	} catch (returnData) {
-		return returnData
+			val = fn(...val)
+	} catch (data) {
+		return data
 	}
 }
+
+export const recursionAsync = fn => (...val) => {
+  let loop = (resolve) => {
+    setTimeout(() => {
+      try {
+        val = fn(...val)
+      } catch (data) {
+        return resolve(data)
+      }
+      loop(resolve)
+    }, 0)
+  }
 
 export const lazy = fn => {
 	let cache
