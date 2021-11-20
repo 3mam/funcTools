@@ -28,6 +28,7 @@ export const recursionAsync = fn => (...val) => {
     loop(resolve)
   })
 }
+
 export const lazy = fn => {
 	let cache
 	return () => {
