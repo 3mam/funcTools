@@ -14,7 +14,7 @@ export const recursion = fn => (...val) => {
 }
 
 export const recursionAsync = fn => (...val) => {
-  let loop = (resolve) => {
+  let loop = resolve => {
     setTimeout(() => {
       try {
         val = fn(...val)
@@ -24,7 +24,10 @@ export const recursionAsync = fn => (...val) => {
       loop(resolve)
     }, 0)
   }
-
+  return new Promise((resolve) => {
+    loop(resolve)
+  })
+}
 export const lazy = fn => {
 	let cache
 	return () => {
