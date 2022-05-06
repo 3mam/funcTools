@@ -19,7 +19,7 @@ export const recursionAsync = fn => (...val) => {
       try {
         val = fn(...val)
       } catch (data) {
-        return resolve(data)
+        resolve(data)
       }
       loop(resolve)
     }, 0)
